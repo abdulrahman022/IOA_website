@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tajweed Learning Game - Islam Online Academy</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Practice your Tajweed skills with our interactive learning game. Test your knowledge of Quranic recitation rules in a fun and engaging way.">
+    <meta name="keywords" content="tajweed game, learn tajweed online, quran recitation practice, interactive tajweed, islamic education game">
+    <meta name="author" content="Islam Online Academy">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Tajweed Learning Game - Islam Online Academy">
+    <meta property="og:description" content="Practice your Tajweed skills with our interactive learning game. Test your knowledge of Quranic recitation rules in a fun and engaging way.">
+    <meta property="og:image" content="images/logo.png">
+    <meta property="og:url" content="https://islamonlineacademy.com/tajweed-game.html">
+    <meta property="og:type" content="website">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Amiri:wght@400;700&family=Scheherazade+New:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Root Variables */
+        :root {
+            --primary-color: #1e4b72;
+            --secondary-color: #4caf50;
+            --accent-color: #f8c40c;
+            --text-color: #333;
+            --light-text: #666;
+            --white: #fff;
+            --light-bg: #f9f9f9;
+            --border-color: #e0e0e0;
+            --box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+            
+            /* Tajweed Colors */
+            --tajweed-idgham: #FF5722;
+            --tajweed-ikhfa: #2196F3;
+            --tajweed-iqlab: #9C27B0;
+            --tajweed-idhar: #4CAF50;
+            --tajweed-qalqalah: #FFC107;
+            --tajweed-ghunnah: #E91E63;
+            --tajweed-madd: #3F51B5;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background-color: var(--accent-color);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-header p {
+            color: var(--light-text);
+            font-size: 18px;
+        }
+
+        .bg-light {
+            background-color: var(--light-bg);
+        }
+
+        .bg-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: 500;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: #173d5f;
+            color: var(--white);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--white);
+        }
+
+        .btn-secondary:hover {
+            background-color: #3d8b40;
+            color: var(--white);
+        }
+
+        .btn-accent {
+            background-color: var(--accent-color);
+            color: var(--text-color);
+        }
+
+        .btn-accent:hover {
+            background-color: #e0b00a;
+        }
+
+        .btn-light {
+            background-color: var(--white);
+            color: var(--primary-color);
+        }
+
+        .btn-light:hover {
+            background-color: #f0f0f0;
+        }
+
+        .btn-block {
+            display: block;
+            width: 100%;
+        }
+
+        /* Header Styles */
+        #header {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 999;
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .top-bar {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 10px 0;
+            font-size: 14px;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .contact-info a {
+            color: var(--white);
+            margin-right: 20px;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links a {
+            color: var(--white);
+            margin-left: 15px;
+            font-size: 16px;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .navbar {
+            padding: 15px 0;
+            background-color: var(--white);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 60px;
+        }
+
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 5px 0;
+            transition: var(--transition);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-menu li {
+            position: relative;
+            margin: 0 15px;
+        }
+
+        .nav-menu li a {
+            color: var(--text-color);
+            font-weight: 500;
+            padding: 10px 0;
+            display: block;
+        }
+
+        .nav-menu li a:hover,
+        .nav-menu li a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-menu li a.active:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 220px;
+            background-color: var(--white);
+            box-shadow: var(--box-shadow);
+            border-radius: 5px;
+            padding: 10px 0;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: var(--transition);
+            z-index: 99;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu li {
+            margin: 0;
+        }
+
+        .dropdown-menu li a {
+            padding: 10px 20px;
+            display: block;
+            font-weight: 400;
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: var(--light-bg);
+        }
+
+        .btn-register {
+            background-color: var(--secondary-color);
+            color: var(--white);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 500;
+            margin-left: 20px;
+        }
+
+        .btn-register:hover {
+            background-color: #3d8b40;
+            color: var(--white);
+        }
+
+        /* Page Header */
+        .page-header {
+            background-color: var(--light-bg);
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 40px;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 16px;
+        }
+
+        .breadcrumb-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb-item + .breadcrumb-item::before {
+            content: '/';
+            margin: 0 10px;
+            color: var(--light-text);
+        }
+
+        .breadcrumb-item a {
+            color: var(--primary-color);
+        }
+
+        .breadcrumb-item.active {
+            color: var(--light-text);
+        }
+
+        /* Tajweed Game Styles */
+        .game-container {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .game-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .game-stats {
+            display: flex;
+            gap: 20px;
+        }
+
+        .stat-item {
+            background-color: var(--light-bg);
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+
+        .stat-value {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .game-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .difficulty-selector {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .difficulty-btn {
+            padding: 8px 15px;
+            border-radius: 5px;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 14px;
+        }
+
+        .difficulty-btn.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .quran-display {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            direction: rtl;
+        }
+
+        .quran-text {
+            font-family: 'Scheherazade New', serif;
+            font-size: 32px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .tajweed-word {
+            position: relative;
+            cursor: pointer;
+            padding: 0 5px;
+            margin: 0 3px;
+            display: inline-block;
+        }
+
+        .tajweed-word.idgham {
+            background-color: rgba(255, 87, 34, 0.2);
+        }
+
+        .tajweed-word.ikhfa {
+            background-color: rgba(33, 150, 243, 0.2);
+        }
+
+        .tajweed-word.iqlab {
+            background-color: rgba(156, 39, 176, 0.2);
+        }
+
+        .tajweed-word.idhar {
+            background-color: rgba(76, 175, 80, 0.2);
+        }
+
+        .tajweed-word.qalqalah {
+            background-color: rgba(255, 193, 7, 0.2);
+        }
+
+        .tajweed-word.ghunnah {
+            background-color: rgba(233, 30, 99, 0.2);
+        }
+
+        .tajweed-word.madd {
+            background-color: rgba(63, 81, 181, 0.2);
+        }
+
+        .tajweed-word.selected {
+            outline: 2px solid var(--primary-color);
+        }
+
+        .tajweed-word:hover {
+            opacity: 0.8;
+        }
+
+        .question-container {
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .question-text {
+            font-size: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .options-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .option-btn {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: var(--white);
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .option-btn:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .option-btn.correct {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+        }
+
+        .option-btn.incorrect {
+            background-color: #f44336;
+            border-color: #f44336;
+        }
+
+        .feedback-container {
+            background-color: var(--light-bg);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .feedback-container.show {
+            display: block;
+        }
+
+        .feedback-correct {
+            color: var(--secondary-color);
+            font-weight: 500;
+        }
+
+        .feedback-incorrect {
+            color: #f44336;
+            font-weight: 500;
+        }
+
+        .feedback-explanation {
+            margin-top: 10px;
+            padding: 15px;
+            background-color: var(--white);
+            border-radius: 5px;
+        }
+
+        .game-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .tajweed-legend {
+            margin-top: 40px;
+            background-color: var(--light-bg);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .legend-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .legend-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .legend-color.idgham {
+            background-color: var(--tajweed-idgham);
+        }
+
+        .legend-color.ikhfa {
+            background-color: var(--tajweed-ikhfa);
+        }
+
+        .legend-color.iqlab {
+            background-color: var(--tajweed-iqlab);
+        }
+
+        .legend-color.idhar {
+            background-color: var(--tajweed-idhar);
+        }
+
+        .legend-color.qalqalah {
+            background-color: var(--tajweed-qalqalah);
+        }
+
+        .legend-color.ghunnah {
+            background-color: var(--tajweed-ghunnah);
+        }
+
+        .legend-color.madd {
+            background-color: var(--tajweed-madd);
+        }
+
+        /* Results Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: var(--white);
+            border-radius: 10px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            transform: translateY(-20px);
+            transition: var(--transition);
+        }
+
+        .modal-overlay.show .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            color: var(--primary-color);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--light-text);
+        }
+
+        .results-summary {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .score-display {
+            font-size: 48px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .score-text {
+            font-size: 18px;
+            color: var(--light-text);
+        }
+
+        .results-details {
+            margin-bottom: 30px;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .result-label {
+            font-weight: 500;
+        }
+
+        .result-value {
+            font-weight: 700;
+        }
+
+        .result-value.good {
+            color: var(--secondary-color);
+        }
+
+        .result-value.bad {
+            color: #f44336;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        /* Alert Styles */
+        .alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            max-width: 400px;
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 0;
+            z-index: 9999;
+            transform: translateX(120%);
+            transition: transform 0.3s ease;
+        }
+
+        .alert.show {
+            transform: translateX(0);
+        }
+
+        .alert-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .alert-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            color: #999;
+            margin-left: 10px;
+        }
+
+        .alert-success {
+            border-left: 4px solid #28a745;
+        }
+
+        .alert-error {
+            border-left: 4px solid #dc3545;
+        }
+
+        .alert-info {
+            border-left: 4px solid #17a2b8;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                position: fixed;
+                top: 0;
+                right: -300px;
+                width: 300px;
+                height: 100vh;
+                background-color: var(--white);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 80px 20px 30px;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+                transition: var(--transition);
+                z-index: 999;
+                overflow-y: auto;
+            }
+            
+            .nav-menu.active {
+                right: 0;
+            }
+            
+            .nav-menu li {
+                margin: 0;
+                width: 100%;
+            }
+            
+            .nav-menu li a {
+                padding: 12px 0;
+                border-bottom: 1px solid var(--border-color);
+            }
+            
+            .dropdown-menu {
+                position: static;
+                width: 100%;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                padding: 0;
+                display: none;
+            }
+            
+            .dropdown-menu li a {
+                padding-left: 20px;
+            }
+            
+            .btn-register {
+                margin: 20px 0 0;
+                display: inline-block;
+            }
+            
+            .menu-toggle.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .menu-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -7px);
+            }
+            
+            .game-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .quran-text {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section {
+                padding: 60px 0;
+            }
+            
+            .section-header h2 {
+                font-size: 30px;
+            }
+            
+            .page-header {
+                padding: 40px 0;
+            }
+            
+            .page-header h1 {
+                font-size: 32px;
+            }
+            
+            .quran-text {
+                font-size: 24px;
+            }
+            
+            .options-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .game-actions {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .game-actions .btn {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .container {
+                padding: 0 20px;
+            }
+            
+            .top-bar .container {
+                flex-direction: column;
+            }
+            
+            .contact-info {
+                margin-bottom: 10px;
+            }
+            
+            .social-links {
+                margin-top: 10px;
+            }
+            
+            .section-header h2 {
+                font-size: 26px;
+            }
+            
+            .page-header h1 {
+                font-size: 28px;
+            }
+            
+            .quran-text {
+                font-size: 20px;
+            }
+            
+            .game-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="contact-info">
+                    <a href="mailto:islamonlineacademy78@gmail.com"><i class="fas fa-envelope"></i> islamonlineacademy78@gmail.com</a>
+                    <a href="https://wa.me/923170936381"><i class="fab fa-whatsapp"></i> +92 317 09 36 381</a>
+                </div>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%20png-FYcuLSuyXfzBydN0xZMemK99qn9U18.png" alt="Islam Online Academy Logo">
+                </a>
+                
+                <div class="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li class="dropdown">
+                        <a href="courses.html">Courses <i class="fas fa-chevron-down"></i></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="courses.html#tajweed">Basic Tajweed</a></li>
+                            <li><a href="courses.html#hifz">Hifz ul Quran</a></li>
+                            <li><a href="courses.html#namaz">Namaz & Kalmas</a></li>
+                            <li><a href="courses.html#arabic">Arabic Language</a></li>
+                            <li><a href="courses.html#tafseer">Tafseer</a></li>
+                            <li><a href="tajweed-game.html">Tajweed Game (New)</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="teachers.html">Our Teachers</a></li>
+                    <li><a href="testimonials.html">Testimonials</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                
+                <a href="register.html" class="btn-register">Register Now</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Tajweed Learning Game</h1>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="courses.html">Courses</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Tajweed Game</li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Game Introduction Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Master Tajweed Rules</h2>
+                <p>Test your knowledge of Tajweed rules with our interactive learning game</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="game-container">
+                        <div class="game-header">
+                            <div class="game-stats">
+                                <div class="stat-item">Score: <span class="stat-value" id="score">0</span></div>
+                                <div class="stat-item">Level: <span class="stat-value" id="level">1</span></div>
+                                <div class="stat-item">Questions: <span class="stat-value" id="question-count">1</span>/10</div>
+                            </div>
+                            <div class="game-controls">
+                                <button class="btn btn-primary" id="restart-btn">Restart Game</button>
+                                <button class="btn btn-light" id="help-btn">Help</button>
+                            </div>
+                        </div>
+                        
+                        <div class="difficulty-selector">
+                            <span>Difficulty:</span>
+                            <button class="difficulty-btn active" data-difficulty="beginner">Beginner</button>
+                            <button class="difficulty-btn" data-difficulty="intermediate">Intermediate</button>
+                            <button class="difficulty-btn" data-difficulty="advanced">Advanced</button>
+                        </div>
+                        
+                        <div class="quran-display">
+                            <div class="quran-text" id="quran-text">
+                                <span class="tajweed-word" data-rule="idgham">وَمِنْ</span>
+                                <span class="tajweed-word" data-rule="idhar">شَرِّ</span>
+                                <span class="tajweed-word" data-rule="ghunnah">غَاسِقٍ</span>
+                                <span class="tajweed-word" data-rule="ikhfa">إِذَا</span>
+                                <span class="tajweed-word" data-rule="qalqalah">وَقَبَ</span>
+                            </div>
+                        </div>
+                        
+                        <div class="question-container">
+                            <div class="question-text" id="question-text">
+                                What Tajweed rule is applied in the highlighted word?
+                            </div>
+                            <div class="options-container" id="options-container">
+                                <button class="option-btn" data-option="idgham">Idgham (Merging)</button>
+                                <button class="option-btn" data-option="ikhfa">Ikhfa (Hiding)</button>
+                                <button class="option-btn" data-option="iqlab">Iqlab (Converting)</button>
+                                <button class="option-btn" data-option="idhar">Idhar (Clear Pronunciation)</button>
+                            </div>
+                        </div>
+                        
+                        <div class="feedback-container" id="feedback-container">
+                            <div class="feedback-text" id="feedback-text"></div>
+                            <div class="feedback-explanation" id="feedback-explanation"></div>
+                        </div>
+                        
+                        <div class="game-actions">
+                            <button class="btn btn-secondary" id="next-btn">Next Question</button>
+                            <button class="btn btn-accent" id="show-results-btn">Show Results</button>
+                        </div>
+                    </div>
+                    
+                    <div class="tajweed-legend">
+                        <h3 class="legend-title">Tajweed Rules Legend</h3>
+                        <div class="legend-items">
+                            <div class="legend-item">
+                                <div class="legend-color idgham"></div>
+                                <span>Idgham (Merging)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color ikhfa"></div>
+                                <span>Ikhfa (Hiding)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color iqlab"></div>
+                                <span>Iqlab (Converting)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color idhar"></div>
+                                <span>Idhar (Clear)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color qalqalah"></div>
+                                <span>Qalqalah (Echo)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color ghunnah"></div>
+                                <span>Ghunnah (Nasalization)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color madd"></div>
+                                <span>Madd (Prolongation)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Play Section -->
+    <section class="section bg-light">
+        <div class="container">
+            <div class="section-header">
+                <h2>How to Play</h2>
+                <p>Learn how to use the Tajweed Learning Game to improve your recitation</p>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="game-container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3 class="mb-4">Game Instructions</h3>
+                                <ol>
+                                    <li>Select your difficulty level (Beginner, Intermediate, or Advanced)</li>
+                                    <li>Read the Quranic text displayed on the screen</li>
+                                    <li>A word will be highlighted in the text</li>
+                                    <li>Identify the Tajweed rule applied in the highlighted word</li>
+                                    <li>Select the correct answer from the options provided</li>
+                                    <li>Get immediate feedback on your answer</li>
+                                    <li>Continue to the next question</li>
+                                    <li>Complete all 10 questions to see your final score</li>
+                                </ol>
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="mb-4">Benefits</h3>
+                                <ul>
+                                    <li>Learn to identify Tajweed rules in context</li>
+                                    <li>Practice recognizing different rules visually</li>
+                                    <li>Understand the application of rules in actual Quranic text</li>
+                                    <li>Track your progress and improvement over time</li>
+                                    <li>Challenge yourself with increasing difficulty levels</li>
+                                    <li>Receive detailed explanations for each rule</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Modal -->
+    <div class="modal-overlay" id="results-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Game Results</h3>
+                <button class="modal-close" id="close-modal">&times;</button>
+            </div>
+            <div class="results-summary">
+                <div class="score-display" id="final-score">8/10</div>
+                <div class="score-text">Great job! You're becoming a Tajweed master!</div>
+            </div>
+            <div class="results-details">
+                <div class="result-item">
+                    <div class="result-label">Correct Answers:</div>
+                    <div class="result-value good" id="correct-answers">8</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Incorrect Answers:</div>
+                    <div class="result-value bad" id="incorrect-answers">2</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Accuracy:</div>
+                    <div class="result-value" id="accuracy">80%</div>
+                </div>
+                <div class="result-item">
+                    <div class="result-label">Difficulty:</div>
+                    <div class="result-value" id="difficulty-level">Beginner</div>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn btn-primary" id="play-again-btn">Play Again</button>
+                <button class="btn btn-light" id="share-results-btn">Share Results</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="footer-top">
+            <div class="container">
+                <div class="footer-widgets">
+                    <!-- Widget 1: About -->
+                    <div class="footer-widget">
+                        <div class="footer-logo">
+                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%20png-FYcuLSuyXfzBydN0xZMemK99qn9U18.png" alt="Islam Online Academy Logo">
+                        </div>
+                        <p>Islam Online Academy is a premier online institution dedicated to providing quality Quranic education to students worldwide since 2022.</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Widget 2: Quick Links -->
+                    <div class="footer-widget">
+                        <h3>Quick Links</h3>
+                        <ul class="footer-links">
+                            <li><a href="index.html">Home</a></li>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="courses.html">Courses</a></li>
+                            <li><a href="teachers.html">Our Teachers</a></li>
+                            <li><a href="testimonials.html">Testimonials</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Widget 3: Courses -->
+                    <div class="footer-widget">
+                        <h3>Our Courses</h3>
+                        <ul class="footer-links">
+                            <li><a href="courses.html#tajweed">Basic Tajweed</a></li>
+                            <li><a href="courses.html#hifz">Hifz ul Quran</a></li>
+                            <li><a href="courses.html#namaz">Namaz & Kalmas</a></li>
+                            <li><a href="courses.html#arabic">Arabic Language</a></li>
+                            <li><a href="courses.html#tafseer">Tafseer</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Widget 4: Contact -->
+                    <div class="footer-widget">
+                        <h3>Contact Us</h3>
+                        <ul class="contact-info">
+                            <li><i class="fas fa-envelope"></i> <a href="mailto:islamonlineacademy78@gmail.com">islamonlineacademy78@gmail.com</a></li>
+                            <li><i class="fab fa-whatsapp"></i> <a href="https://wa.me/923170936381">+92 317 09 36 381</a></li>
+                            <li><i class="fas fa-map-marker-alt"></i> Pakistan</li>
+                            <li><i class="fas fa-clock"></i> Available 24/7</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="copyright">
+                    <p>&copy; 2022-2025 Islam Online Academy. All Rights Reserved.</p>
+                </div>
+                <div class="footer-bottom-links">
+                    <a href="privacy-policy.html">Privacy Policy</a>
+                    <a href="terms-conditions.html">Terms & Conditions</a>
+                    <a href="sitemap.html">Sitemap</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Game Variables
+            let score = 0;
+            let level = 1;
+            let questionCount = 1;
+            let correctAnswers = 0;
+            let incorrectAnswers = 0;
+            let currentDifficulty = 'beginner';
+            let currentQuestion = null;
+            let selectedWord = null;
+            
+            // DOM Elements
+            const scoreElement = document.getElementById('score');
+            const levelElement = document.getElementById('level');
+            const questionCountElement = document.getElementById('question-count');
+            const quranTextElement = document.getElementById('quran-text');
+            const questionTextElement = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('options-container');
+            const feedbackContainer = document.getElementById('feedback-container');
+            const feedbackTextElement = document.getElementById('feedback-text');
+            const feedbackExplanationElement = document.getElementById('feedback-explanation');
+            const nextButton = document.getElementById('next-btn');
+            const showResultsButton = document.getElementById('show-results-btn');
+            const restartButton = document.getElementById('restart-btn');
+            const helpButton = document.getElementById('help-btn');
+            const difficultyButtons = document.querySelectorAll('.difficulty-btn');
+            const resultsModal = document.getElementById('results-modal');
+            const closeModalButton = document.getElementById('close-modal');
+            const playAgainButton = document.getElementById('play-again-btn');
+            const shareResultsButton = document.getElementById('share-results-btn');
+            const finalScoreElement = document.getElementById('final-score');
+            const correctAnswersElement = document.getElementById('correct-answers');
+            const incorrectAnswersElement = document.getElementById('incorrect-answers');
+            const accuracyElement = document.getElementById('accuracy');
+            const difficultyLevelElement = document.getElementById('difficulty-level');
+            
+            // Tajweed Rules Database
+            const tajweedRules = {
+                idgham: {
+                    name: 'Idgham (Merging)',
+                    description: 'When noon saakin (ن) or tanween is followed by one of the letters (ي ن م و ل ر), the noon sound merges into the following letter.',
+                    examples: ['مِنْ يَعْمَلْ', 'مِنْ نَّفْسٍ', 'مِنْ مَّاءٍ', 'مِنْ وَّلِيٍّ', 'مِنْ لَّدُنْهُ', 'مِنْ رَّبِّهِمْ']
+                },
+                ikhfa: {
+                    name: 'Ikhfa (Hiding)',
+                    description: 'When noon saakin (ن) or tanween is followed by one of the 15 ikhfa letters, the noon sound is hidden and pronounced with a nasal sound.',
+                    examples: ['مِنْ قَبْلِ', 'أَنْ تَقُولَ', 'كُنْتُمْ', 'أَنْ ذَهَبَ', 'مَنْ صَبَرَ']
+                },
+                iqlab: {
+                    name: 'Iqlab (Converting)',
+                    description: 'When noon saakin (ن) or tanween is followed by the letter ba (ب), the noon sound is converted to a meem sound.',
+                    examples: ['مِنْ بَعْدِ', 'سَمِيعٌ بَصِيرٌ', 'أَنْبِئْهُمْ']
+                },
+                idhar: {
+                    name: 'Idhar (Clear Pronunciation)',
+                    description: 'When noon saakin (ن) or tanween is followed by one of the throat letters (ء ه ع ح غ خ), the noon sound is pronounced clearly.',
+                    examples: ['مِنْ خَيْرٍ', 'مَنْ هَاجَرَ', 'مِنْ عِلْمٍ', 'مِنْ حَكِيمٍ']
+                },
+                qalqalah: {
+                    name: 'Qalqalah (Echo)',
+                    description: 'When any of the five qalqalah letters (ق ط ب ج د) has a sukoon, it is pronounced with a slight bounce or echo.',
+                    examples: ['قُلْ', 'يَجْعَلُ', 'أَطْعَمَهُمْ', 'يَبْغُونَ', 'قَدْ']
+                },
+                ghunnah: {
+                    name: 'Ghunnah (Nasalization)',
+                    description: 'The nasal sound that occurs with noon (ن) and meem (م) when they have a shaddah.',
+                    examples: ['إِنَّ', 'ثُمَّ', 'الجَنَّةِ', 'مِمَّا']
+                },
+                madd: {
+                    name: 'Madd (Prolongation)',
+                    description: 'The lengthening of the sound of a vowel for a specific duration.',
+                    examples: ['قَالَ', 'فِيهَا', 'يَقُولُ', 'آمَنُوا']
+                }
+            };
+            
+            // Quran Verses Database with Tajweed Rules
+            const quranVerses = [
+                // Beginner Level
+                {
+                    difficulty: 'beginner',
+                    text: [
+                        { word: 'قُلْ', rule: 'qalqalah' },
+                        { word: 'أَعُوذُ', rule: null },
+                        { word: 'بِرَبِّ', rule: 'idgham' },
+                        { word: 'الْفَلَقِ', rule: null }
+                    ],
+                    translation: 'Say: I seek refuge with the Lord of the Daybreak'
+                },
+                {
+                    difficulty: 'beginner',
+                    text: [
+                        { word: 'مِنْ', rule: 'idgham' },
+                        { word: 'شَرِّ', rule: 'idhar' },
+                        { word: 'مَا', rule: null },
+                        { word: 'خَلَقَ', rule: 'qalqalah' }
+                    ],
+                    translation: 'From the evil of that which He created'
+                },
+                {
+                    difficulty: 'beginner',
+                    text: [
+                        { word: 'وَمِنْ', rule: 'idgham' },
+                        { word: 'شَرِّ', rule: 'idhar' },
+                        { word: 'غَاسِقٍ', rule: 'ghunnah' },
+                        { word: 'إِذَا', rule: 'ikhfa' },
+                        { word: 'وَقَبَ', rule: 'qalqalah' }
+                    ],
+                    translation: 'And from the evil of darkness when it settles'
+                },
+                
+                // Intermediate Level
+                {
+                    difficulty: 'intermediate',
+                    text: [
+                        { word: 'إِنَّا', rule: 'ghunnah' },
+                        { word: 'أَعْطَيْنَاكَ', rule: 'qalqalah' },
+                        { word: 'الْكَوْثَرَ', rule: null }
+                    ],
+                    translation: 'Indeed, We have granted you Al-Kawthar'
+                },
+                {
+                    difficulty: 'intermediate',
+                    text: [
+                        { word: 'فَصَلِّ', rule: null },
+                        { word: 'لِرَبِّكَ', rule: 'idgham' },
+                        { word: 'وَانْحَرْ', rule: 'idhar' }
+                    ],
+                    translation: 'So pray to your Lord and sacrifice'
+                },
+                {
+                    difficulty: 'intermediate',
+                    text: [
+                        { word: 'إِنَّ', rule: 'ghunnah' },
+                        { word: 'شَانِئَكَ', rule: null },
+                        { word: 'هُوَ', rule: null },
+                        { word: 'الْأَبْتَرُ', rule: 'qalqalah' }
+                    ],
+                    translation: 'Indeed, your enemy is the one cut off'
+                },
+                
+                // Advanced Level
+                {
+                    difficulty: 'advanced',
+                    text: [
+                        { word: 'وَالضُّحَىٰ', rule: null },
+                        { word: 'وَاللَّيْلِ', rule: 'idgham' },
+                        { word: 'إِذَا', rule: 'ikhfa' },
+                        { word: 'سَجَىٰ', rule: null }
+                    ],
+                    translation: 'By the morning brightness, And by the night when it covers with darkness'
+                },
+                {
+                    difficulty: 'advanced',
+                    text: [
+                        { word: 'مَا', rule: null },
+                        { word: 'وَدَّعَكَ', rule: 'ghunnah' },
+                        { word: 'رَبُّكَ', rule: null },
+                        { word: 'وَمَا', rule: null },
+                        { word: 'قَلَىٰ', rule: 'qalqalah' }
+                    ],
+                    translation: 'Your Lord has not taken leave of you, nor has He detested you'
+                },
+                {
+                    difficulty: 'advanced',
+                    text: [
+                        { word: 'وَلَلْآخِرَةُ', rule: 'madd' },
+                        { word: 'خَيْرٌ', rule: 'idhar' },
+                        { word: 'لَّكَ', rule: null },
+                        { word: 'مِنَ', rule: 'ghunnah' },
+                        { word: 'الْأُولَىٰ', rule: null }
+                    ],
+                    translation: 'And the Hereafter is better for you than the first life'
+                }
+            ];
+            
+            // Game Functions
+            function initGame() {
+                score = 0;
+                level = 1;
+                questionCount = 1;
+                correctAnswers = 0;
+                incorrectAnswers = 0;
+                
+                updateStats();
+                loadQuestion();
+                
+                nextButton.style.display = 'none';
+                showResultsButton.style.display = 'none';
+                feedbackContainer.classList.remove('show');
+            }
+            
+            function updateStats() {
+                scoreElement.textContent = score;
+                levelElement.textContent = level;
+                questionCountElement.textContent = `${questionCount}/10`;
+            }
+            
+            function loadQuestion() {
+                // Filter verses by current difficulty
+                const filteredVerses = quranVerses.filter(verse => verse.difficulty === currentDifficulty);
+                
+                // Randomly select a verse
+                const randomVerse = filteredVerses[Math.floor(Math.random() * filteredVerses.length)];
+                
+                // Find words with tajweed rules
+                const wordsWithRules = randomVerse.text.filter(word => word.rule !== null);
+                
+                // Randomly select a word with a rule
+                const selectedWordObj = wordsWithRules[Math.floor(Math.random() * wordsWithRules.length)];
+                selectedWord = selectedWordObj.word;
+                
+                // Set current question
+                currentQuestion = {
+                    verse: randomVerse,
+                    selectedWord: selectedWordObj,
+                    correctRule: selectedWordObj.rule
+                };
+                
+                // Render verse
+                renderVerse(randomVerse, selectedWordObj);
+                
+                // Set question text
+                questionTextElement.textContent = `What Tajweed rule is applied in the highlighted word "${selectedWord}"?`;
+                
+                // Generate options
+                generateOptions(selectedWordObj.rule);
+            }
+            
+            function renderVerse(verse, selectedWordObj) {
+                quranTextElement.innerHTML = '';
+                
+                verse.text.forEach(wordObj => {
+                    const wordSpan = document.createElement('span');
+                    wordSpan.textContent = wordObj.word;
+                    wordSpan.className = 'tajweed-word';
+                    
+                    if (wordObj.rule) {
+                        wordSpan.classList.add(wordObj.rule);
+                        wordSpan.dataset.rule = wordObj.rule;
+                    }
+                    
+                    if (wordObj.word === selectedWordObj.word && wordObj.rule === selectedWordObj.rule) {
+                        wordSpan.classList.add('selected');
+                    }
+                    
+                    quranTextElement.appendChild(wordSpan);
+                    quranTextElement.appendChild(document.createTextNode(' '));
+                });
+            }
+            
+            function generateOptions(correctRule) {
+                // Clear previous options
+                optionsContainer.innerHTML = '';
+                
+                // Get all rule keys
+                const allRules = Object.keys(tajweedRules);
+                
+                // Always include the correct rule
+                const options = [correctRule];
+                
+                // Add 3 more unique random rules
+                while (options.length < 4) {
+                    const randomRule = allRules[Math.floor(Math.random() * allRules.length)];
+                    if (!options.includes(randomRule)) {
+                        options.push(randomRule);
+                    }
+                }
+                
+                // Shuffle options
+                shuffleArray(options);
+                
+                // Create option buttons
+                options.forEach(rule => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-btn';
+                    optionButton.textContent = tajweedRules[rule].name;
+                    optionButton.dataset.option = rule;
+                    
+                    optionButton.addEventListener('click', () => checkAnswer(rule));
+                    
+                    optionsContainer.appendChild(optionButton);
+                });
+            }
+            
+            function checkAnswer(selectedRule) {
+                const correctRule = currentQuestion.correctRule;
+                const isCorrect = selectedRule === correctRule;
+                
+                // Disable all option buttons
+                const optionButtons = document.querySelectorAll('.option-btn');
+                optionButtons.forEach(button => {
+                    button.disabled = true;
+                    
+                    if (button.dataset.option === correctRule) {
+                        button.classList.add('correct');
+                    } else if (button.dataset.option === selectedRule && !isCorrect) {
+                        button.classList.add('incorrect');
+                    }
+                });
+                
+                // Show feedback
+                feedbackContainer.classList.add('show');
+                
+                if (isCorrect) {
+                    score += currentDifficulty === 'beginner' ? 10 : currentDifficulty === 'intermediate' ? 20 : 30;
+                    correctAnswers++;
+                    feedbackTextElement.innerHTML = '<span class="feedback-correct">Correct!</span>';
+                } else {
+                    incorrectAnswers++;
+                    feedbackTextElement.innerHTML = '<span class="feedback-incorrect">Incorrect!</span> The correct answer is: ' + tajweedRules[correctRule].name;
+                }
+                
+                // Show explanation
+                feedbackExplanationElement.textContent = tajweedRules[correctRule].description;
+                
+                // Update stats
+                updateStats();
+                
+                // Show next button
+                nextButton.style.display = 'inline-block';
+                
+                // Show results button if it's the last question
+                if (questionCount === 10) {
+                    showResultsButton.style.display = 'inline-block';
+                    nextButton.style.display = 'none';
+                }
+            }
+            
+            function nextQuestion() {
+                questionCount++;
+                
+                if (questionCount > 10) {
+                    showResults();
+                    return;
+                }
+                
+                // Update level based on score
+                if (score >= 100 && level === 1) {
+                    level = 2;
+                } else if (score >= 250 && level === 2) {
+                    level = 3;
+                }
+                
+                updateStats();
+                loadQuestion();
+                
+                // Hide feedback and next button
+                feedbackContainer.classList.remove('show');
+                nextButton.style.display = 'none';
+            }
+            
+            function showResults() {
+                // Calculate accuracy
+                const accuracy = Math.round((correctAnswers / 10) * 100);
+                
+                // Update results modal
+                finalScoreElement.textContent = `${score}`;
+                correctAnswersElement.textContent = correctAnswers;
+                incorrectAnswersElement.textContent = incorrectAnswers;
+                accuracyElement.textContent = `${accuracy}%`;
+                difficultyLevelElement.textContent = currentDifficulty.charAt(0).toUpperCase() + currentDifficulty.slice(1);
+                
+                // Show modal
+                resultsModal.classList.add('show');
+            }
+            
+            function changeDifficulty(difficulty) {
+                currentDifficulty = difficulty;
+                
+                // Update active button
+                difficultyButtons.forEach(button => {
+                    if (button.dataset.difficulty === difficulty) {
+                        button.classList.add('active');
+                    } else {
+                        button.classList.remove('active');
+                    }
+                });
+                
+                // Restart game with new difficulty
+                initGame();
+            }
+            
+            // Helper Functions
+            function shuffleArray(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+                return array;
+            }
+            
+            function showAlert(message, type = 'info') {
+                // Create alert element
+                const alertElement = document.createElement('div');
+                alertElement.className = `alert alert-${type}`;
+                alertElement.innerHTML = `
+                    <div class="alert-content">
+                        <span>${message}</span>
+                        <button class="alert-close">&times;</button>
+                    </div>
+                `;
+                
+                // Add to document
+                document.body.appendChild(alertElement);
+                
+                // Show alert
+                setTimeout(() => {
+                    alertElement.classList.add('show');
+                }, 10);
+                
+                // Close button functionality
+                const closeButton = alertElement.querySelector('.alert-close');
+                closeButton.addEventListener('click', () => {
+                    alertElement.classList.remove('show');
+                    setTimeout(() => {
+                        alertElement.remove();
+                    }, 300);
+                });
+                
+                // Auto close after 5 seconds
+                setTimeout(() => {
+                    alertElement.classList.remove('show');
+                    setTimeout(() => {
+                        alertElement.remove();
+                    }, 300);
+                }, 5000);
+            }
+            
+            // Event Listeners
+            nextButton.addEventListener('click', nextQuestion);
+            showResultsButton.addEventListener('click', showResults);
+            restartButton.addEventListener('click', initGame);
+            
+            difficultyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    changeDifficulty(button.dataset.difficulty);
+                });
+            });
+            
+            closeModalButton.addEventListener('click', () => {
+                resultsModal.classList.remove('show');
+            });
+            
+            playAgainButton.addEventListener('click', () => {
+                resultsModal.classList.remove('show');
+                initGame();
+            });
+            
+            shareResultsButton.addEventListener('click', () => {
+                const shareText = `I scored ${score} points in the Tajweed Learning Game at Islam Online Academy! My accuracy was ${accuracyElement.textContent} on ${difficultyLevelElement.textContent} difficulty.`;
+                
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'My Tajweed Game Results',
+                        text: shareText,
+                        url: window.location.href
+                    }).catch(err => {
+                        showAlert('Could not share results. Try copying the text instead.', 'error');
+                    });
+                } else {
+                    // Fallback for browsers that don't support Web Share API
+                    navigator.clipboard.writeText(shareText)
+                        .then(() => {
+                            showAlert('Results copied to clipboard! You can paste and share it.', 'success');
+                        })
+                        .catch(err => {
+                            showAlert('Could not copy results to clipboard.', 'error');
+                        });
+                }
+            });
+            
+            helpButton.addEventListener('click', () => {
+                showAlert('Click on the highlighted word and select the correct Tajweed rule that applies to it. Check the legend below for rule explanations.', 'info');
+            });
+            
+            // Mobile Menu Toggle
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', function() {
+                    menuToggle.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+            }
+            
+            // Initialize the game
+            initGame();
+        });
+    </script>
+</body>
+</html>
